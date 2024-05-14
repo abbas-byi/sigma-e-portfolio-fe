@@ -1,5 +1,12 @@
 import React from "react";
-import { Button, Card, Icon, Input, Label } from "../../components";
+import {
+  Button,
+  Card,
+  Icon,
+  Input,
+  Label,
+  FileDragZone,
+} from "../../components";
 import { Dropzone, FileMosaic } from "@files-ui/react";
 import MultiSelect from "react-multiple-select-dropdown-lite";
 import "react-multiple-select-dropdown-lite/dist/index.css";
@@ -53,6 +60,7 @@ const ActionButtons = (props) => {
 };
 
 const Three = (props) => {
+  const { uploadFileToS3Bucket } = useResumeForm();
   const {
     resumeDetails,
     handleChange,
@@ -60,9 +68,18 @@ const Three = (props) => {
     removeFile,
     nextStep,
   } = props;
-  const handleNext = () => {
-    // console.log("Current Resume Details:", resumeDetails);
-    nextStep();
+  const handleNext = async () => {
+    try {
+      if (resumeDetails.introVideo.length > 0) {
+        await uploadFileToS3Bucket(resumeDetails.introVideo, "introVideo");
+      }
+      if (resumeDetails.achievements.length > 0) {
+        await uploadFileToS3Bucket(resumeDetails.achievements, "achievements");
+      }
+      nextStep();
+    } catch (error) {
+      console.error("Error uploading files:", error);
+    }
   };
 
   const techLanguagesOptios = [
@@ -86,7 +103,7 @@ const Three = (props) => {
     <Card>
       <div>
         <Label>Intro Video</Label>
-        <Dropzone
+        {/*<Dropzone
           onChange={(files) => handleFileChange(files, "introVideo")}
           value={resumeDetails.introVideo}
           name="introVideo"
@@ -100,7 +117,12 @@ const Three = (props) => {
               preview
             />
           ))}
-        </Dropzone>
+        </Dropzone>*/}
+        <FileDragZone
+          onFilesSelected={(files) => handleFileChange(files, "introVideo")}
+          width="100%"
+          height="150px"
+        />
       </div>
       <div className="mt-3">
         <Label>Summary/ About me</Label>
@@ -130,7 +152,7 @@ const Three = (props) => {
       </div>
       <div className="mt-3">
         <Label>Certificates/ Achievements</Label>
-        <Dropzone
+        {/*<Dropzone
           onChange={(files) => handleFileChange(files, "achievements")}
           value={resumeDetails.achievements}
           name="achievements"
@@ -144,22 +166,27 @@ const Three = (props) => {
               preview
             />
           ))}
-        </Dropzone>
+        </Dropzone>*/}
+        <FileDragZone
+          onFilesSelected={(files) => handleFileChange(files, "achievements")}
+          width="100%"
+          height="150px"
+        />
       </div>
       <div className="mt-3">
         <Label>Skills</Label>
         <MultiSelect
-          onChange={(value) => handleChange(value, 'skills')}
+          onChange={(value) => handleChange(value, "skills")}
           options={options}
           className="w-100 changeBorder"
           name="skills"
-          value={resumeDetails.skills.join(',')}
+          value={resumeDetails.skills.join(",")}
         />
       </div>
       <div className="mt-3">
         <Label>Tech Languages</Label>
         <MultiSelect
-          onChange={(value) => handleChange(value, 'techSkills')}
+          onChange={(value) => handleChange(value, "techSkills")}
           options={techLanguagesOptios}
           className="w-100 changeBorder"
           name="languages"

@@ -7,13 +7,13 @@ import {
   Input,
   Label,
   Text,
+  FileDragZone,
 } from "../../components";
 import "react-multiple-select-dropdown-lite/dist/index.css";
 import { useResumeForm } from "./useResumeForm";
 
 const ActionButtons = (props) => {
-  const { onHandleNext } = props; // Custom handler for the Next button
-
+  const { onHandleNext } = props;
   const handleBack = () => {
     props.previousStep();
   };
@@ -59,12 +59,7 @@ const ActionButtons = (props) => {
 
 const Two = (props) => {
   const { uploadFileToS3Bucket } = useResumeForm();
-  const {
-    resumeDetails,
-    handleChange,
-    handleFileChange,
-    nextStep,
-  } = props;
+  const { resumeDetails, handleChange, handleFileChange, nextStep } = props;
 
   const handleNext = async () => {
     try {
@@ -84,22 +79,32 @@ const Two = (props) => {
     <Card>
       <div>
         <Label>Banner Photo/ Logo</Label>
-        <div className={Styles.FileDropArea}>
+        <FileDragZone
+          onFilesSelected={(files) => handleFileChange(files, "bannerPhoto")}
+          width="100%"
+          height="150px"
+        />
+        {/*<div className={Styles.FileDropArea}>
             <p>Please Upload Your Banner Photo</p>
           <input
             name="banner"
             type="file"
             onChange={(e) => handleFileChange(e.target.files, "bannerPhoto")}
-          />
-        </div>
+  />
+        </div>*/}
       </div>
       <div className="mt-3">
-      <Label>Profile Picture</Label>
-      <div className={Styles.FileDropArea}>
+        <Label>Profile Picture</Label>
+        <FileDragZone
+          onFilesSelected={(files) => handleFileChange(files, "profilePhoto")}
+          width="100%"
+          height="150px"
+        />
+        {/*<div className={Styles.FileDropArea}>
       <p>Please Upload Your Profile Photo</p>
       <input name="profilePhoto" type="file" onChange={(e) => handleFileChange(e.target.files, 'profilePhoto')} /> 
-      </div>
-      <Text variant={"md"} color={"secondary"}>
+      </div>*/}
+        <Text variant={"md"} color={"secondary"}>
           Use 400X400 size for better results
         </Text>
       </div>
@@ -168,6 +173,9 @@ const Two = (props) => {
             Hide Branding
           </label>
         </div>
+      </div>
+      <div className="mt-3">
+      <p id="waitMessage"></p>
       </div>
       <ActionButtons {...props} onHandleNext={handleNext} />
     </Card>

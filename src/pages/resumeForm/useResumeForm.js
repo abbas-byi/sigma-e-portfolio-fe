@@ -128,7 +128,6 @@ export const useResumeForm = () => {
       file: file,
       uploaded: false,
     }));
-    console.log("Files prepared for upload:", newFiles);
     setResumeDetails((prevDetails) => ({
       ...prevDetails,
       [fieldName]: newFiles,
@@ -137,32 +136,33 @@ export const useResumeForm = () => {
 
   const submitResumeDetails = async (data) => {
     console.log("this is data", data);
+    // console.log('line 138', data.achievements.map((eachData) => eachData.url || 'empty'))
+    console.log('line 139', data.certificate.map((eachData) => String(eachData.url) || 'empty'))
     data = {
       ...data,
+      profilePhoto: data.profilePhoto[0].url,
+      bannerPhoto: data.bannerPhoto[0].url,
+      introVideo: data.introVideo[0].url,
+      achievements: data.achievements.map((eachData) => String(eachData.url) || 'empty'),
+      certificate: data.certificate.map((eachData) => String(eachData.url) || 'empty'),
       user: sessionStorage.getItem("userId"),
     };
-    let achievements = data.achievements;
-    console.log(achievements, "achievements==============129");
-    for (let item of achievements) {
-      let response = await uploadFile(item);
-      console.log("response at line 135 =====>", response);
-    }
-    // axios({
-    //   method: "POST",
-    //   url: `${process.env.REACT_APP_API_URL}resume`,
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    //   data: data,
-    // }).then((res) => {
-    //   console.log('this data is saved in database', res)
-    // }).catch((e) => {
-    //   console.log('this is error', e)
-    // })
+    axios({
+      method: "POST",
+      url: `${process.env.REACT_APP_API_URL}resume`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: data,
+    }).then((res) => {
+      console.log('this data is saved in database', res)
+    }).catch((e) => {
+      console.log('this is error', e)
+    })
   };
 
   const handleSubmit = () => {
-    console.log("Final submission data:", resumeDetails);
+    submitResumeDetails(resumeDetails);
   };
 
   const uploadFile = async (file) => {
@@ -187,7 +187,7 @@ export const useResumeForm = () => {
         response = progress;
       });
       await upload.done();
-      alert("Upload completed successfully!");
+      console.log('Upload completed successfully!');
       return response;
     } catch (err) {
       console.log("error", err);
@@ -202,15 +202,11 @@ export const useResumeForm = () => {
         const response = await uploadFile(fileObject.file);
         if (response) {
           fileObject.uploaded = true;
-          console.log(
-            "this is response after file upload",
-            urlPrefix + response.Key
-          );
           fileObject.url = urlPrefix + response.Key;
         }
-        return fileObject;
+        return fileObject.url;
       }
-      return fileObject;
+      return fileObject.url;
     });
 
     const updatedFiles = await Promise.all(uploadPromises);
@@ -218,12 +214,9 @@ export const useResumeForm = () => {
     console.log("line 254", updatedFiles);
     setResumeDetails((prevDetails) => ({
       ...prevDetails,
-      [fieldName]: updatedFiles.map((file) => file.url),
-    }));
-
-    setTimeout(() => {
-      console.log("resumeDetails", resumeDetails);
-    }, 5000);
+      [fieldName]: updatedFiles.map((file) => file),
+    })
+  );
   };
 
   return {
