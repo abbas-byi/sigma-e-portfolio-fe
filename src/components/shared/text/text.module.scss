@@ -1,0 +1,39 @@
+@import '../../../assets/scss/variables.scss';
+@import '../../../assets/scss/mixins.scss';
+@import '../../../assets/scss/breakpoints.scss';
+
+
+.xs {
+    font-size: 10px;
+    line-height: 14px;
+    @include textStyling;
+}
+.sm {
+    font-size: 12px;
+    line-height: 18px;
+    @include textStyling;
+}
+.md {
+    font-size: 14px;
+    line-height: 24px;
+    @include textStyling;
+}
+.lg {
+    font-size: 16px;
+    line-height: 28px;
+    @include textStyling;
+}
+.xl {
+    font-size: 18px;
+    line-height: 30px;
+    @include textStyling;
+}
+.xxl {
+    font-size: 20px;
+    line-height: 32px;
+    @include textStyling;
+    @include sm {
+        font-size: 16px;
+        line-height: 28px;
+    }
+}

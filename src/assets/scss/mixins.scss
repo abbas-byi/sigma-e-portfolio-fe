@@ -1,0 +1,73 @@
+@import "./variables.scss";
+@import "../../assets/scss/breakpoints.scss";
+
+@mixin textStyling {
+  &.light {
+    font-family: 'DMSans-Light', sans-serif;
+  } 
+  &.regular {
+    font-family: 'DMSans-Regular', sans-serif;
+  } 
+  &.medium {
+    font-family: 'DMSans-Medium', sans-serif;
+  } 
+  &.semiBold {
+    font-family: 'DMSans-SemiBold', sans-serif;
+  }
+  &.bold {
+    font-family: 'DMSans-Bold', sans-serif;
+  }
+  &.primary {
+    color: $primary;
+  }
+  &.yellow1 {
+    color: $yellow1;
+  }
+  &.yellow2 {
+    color: $yellow2;
+  }
+  &.secondary {
+    color: $secondary;
+  }
+  &.dark {
+    color: $dark;
+  }
+  &.white {
+    color: $white;
+  }
+  &.dark {
+    color: $dark;
+  }
+  &.gray {
+    color: $gray;
+  }
+  &.red {
+    color: $red;
+  }
+  &.green {
+    color: $green;
+  }
+  &.upperCase {
+    text-transform: uppercase;
+  }
+  &.underline {
+    text-decoration: underline;
+  }
+}
+
+@mixin Dashboard {
+  .dashboard {
+    display: flex;
+    padding: 1.5rem;
+    min-height: 100vh;
+
+    .main {
+      width: 100%;
+      padding: 0 0 0 1rem;
+      margin-left: 290px;
+      @include sm {
+        margin-left: 0;
+      }
+    }
+  }
+}

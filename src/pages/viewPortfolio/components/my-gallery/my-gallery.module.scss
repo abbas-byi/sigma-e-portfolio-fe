@@ -1,0 +1,20 @@
+@import "../../assets/scss/variables.scss";
+@mixin sm {
+    @media (max-width: #{450px}) {
+        @content;
+    }
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 15px;
+    img {
+        border-radius: 10px;
+        min-height: 140px;
+        object-fit: cover;
+        @include sm {
+            min-height: 105px;
+        }
+    }
+}

@@ -1,0 +1,66 @@
+@import '../../../assets/scss/variables.scss';
+
+.button {
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 16px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DMSans-SemiBold', sans-serif;
+    user-select: none;
+    transition: 0.2s;
+    border: none;
+    min-width: 112px;
+    i {
+        font-size: 24px;
+    }
+    &.primary {
+        background: transparent;
+        border: solid 1px $primary;
+        color: $primary;
+        padding: 10px 10px 10px 20px;
+        transition: all .4s ease-in-out;
+        i {
+            margin-left: 8px;
+            color: $primary;
+            transition: all .4s ease-in-out;
+        }
+        &:hover {
+            background: $primary;
+            color: $white;
+            i {
+                color: $white;
+            }
+        }
+    }
+    &.primarySolid {
+        background: $primary;
+        border: solid 1px $primary;
+        padding: 10px 20px;
+        color: $white;
+    }
+    &.secondary {
+        background: transparent;
+        border: solid 1px $secondary;
+        color: $secondary;
+        padding: 10px 20px 10px 10px;
+        i {
+            margin-right: 8px;
+            color: $secondary;
+        }
+        &:hover {
+            background: $secondary;
+            color: $white;
+            i {
+                color: $white;
+            }
+        }
+    }
+    &.main {
+        padding: 10px 20px;
+        background: $gradient;
+        white-space: nowrap;
+    }
+}

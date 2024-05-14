@@ -1,0 +1,97 @@
+@import "../../../assets/scss/variables.scss";
+@import "../../../assets/scss/breakpoints.scss";
+
+.sidebar {
+    border-radius: 20px;
+    background: $white;
+    box-shadow: 14px 17px 40px 4px rgba(112, 144, 176, 0.08);
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 1.5rem;
+    z-index: 11;
+    max-height: 94vh;
+    max-width: 285px;
+    height: 100%;
+    @include sm {
+        position: absolute;
+        display: none;
+    }
+    .logo {
+        text-align: center;
+        border-bottom: solid 1px rgba($color: $secondary, $alpha: 0.2);
+        padding-bottom: 1.5rem;
+    }
+    .menus {
+        margin: 2rem 0 0;
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            li {
+                display: flex;
+                align-items: center;
+                padding: 10px 20px;
+                cursor: pointer;
+                position: relative;
+                transition: all .4s ease-in-out;
+                
+                &.active, &:hover {
+                    i, span {
+                        color: $primary;
+                        transition: all .4s ease-in-out;
+                    }
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        top: 10%;
+                        right: 0;
+                        width: 3px;
+                        height: 80%;
+                        border-radius: 5px;
+                        background: $primary;
+                    }
+                }
+                i {
+                    font-size: 22px;
+                    margin-right: 10px;
+                    color: $secondary;
+                }
+                span {
+                    color: $secondary;
+                    font-size: 16px;
+                    font-family: 'Medium', sans-serif;
+                    line-height: 30px; /* 187.5% */
+                }
+            }
+        }
+    }
+    .upgrade {
+        background: $gradient;
+        border-radius: 24px;
+        padding: 1rem;
+        display: flex;
+        padding: 1.5rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        margin: auto 1rem 0;
+        text-align: center;
+        button {
+            background: $white;
+            padding: 10px;
+            min-width: auto;
+            i {
+                margin: 0;
+                transition: all .4s ease-in-out;
+            }
+            &:hover {
+                i {
+                    transform: rotate(45deg);
+                    transition: all .4s ease-in-out;
+                }
+            }
+        }
+    }
+}

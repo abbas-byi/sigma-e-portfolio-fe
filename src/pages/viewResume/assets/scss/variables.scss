@@ -1,0 +1,41 @@
+.theme[data-theme="blue"] {
+    --primary: #1B367B;
+    --primary1: #001958;
+    --primary2: #244390;
+}
+.theme[data-theme="red"] {
+    --primary: #cb0505;
+    --primary1: #580000;
+    --primary2: #902424;
+}
+.theme[data-theme="green"] {
+    --primary: #009a27;
+    --primary1: #00691b;
+    --primary2: #00b12d;
+}
+
+// Colors
+$primary: var(--primary);
+$primary1: var(--primary1);
+$primary2: var(--primary2);
+$white:#ffffff;
+$dark:#555555;
+$gray:#D0D0D0;
+$body: #F4F4F4;
+$red:#FF5325;
+$green:#00b100;
+
+
+// Border
+$border :  1px solid #D0D0D0;
+
+// Border
+$boxShadow : 0px 0px 20px 0px rgba(0, 0, 0, 0.05);
+
+// Font Sizes
+$font-xs:12px;
+$font-sm:14px;
+$font-md:15px;
+$font-lg:16px;
+$font-xl:18px;
+$font-xxl:24px;

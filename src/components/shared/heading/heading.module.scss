@@ -1,0 +1,50 @@
+@import '../../../assets/scss/variables.scss';
+@import '../../../assets/scss/mixins.scss';
+@import '../../../assets/scss/breakpoints.scss';
+
+.h1 {
+    font-size: 60px;
+    line-height: 70px;
+    @include md {
+        font-size: 50px;
+        line-height: 60px;
+    }
+    @include sm {
+        font-size: 40px;
+        line-height: 50px;
+    }
+}
+.h2 {
+    font-size: 32px;
+    line-height: 45px;
+    @include md {
+        font-size: 24px;
+        line-height: 36px;
+    }
+}
+.h3 {
+    font-size: 24px;
+    line-height: 30px;
+}
+.h4 {
+    font-size: 18px;
+    line-height: 26px;
+}
+.h5 {
+    font-size: 16px;
+    line-height: 20px;
+}
+.h6 {
+    font-size: 15px;
+    line-height: 18px;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  margin: 0;
+  @include textStyling;
+}

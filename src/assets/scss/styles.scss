@@ -1,0 +1,124 @@
+@import "./variables.scss";
+@import "./icons.scss";
+
+@font-face {
+  font-family: 'DMSans-Regular';
+  src:  url('../fonts/DM_Sans/DMSans-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'DMSans-Bold';
+  src:  url('../fonts/DM_Sans/DMSans-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'DMSans-BoldItalic';
+  src:  url('../fonts/DM_Sans/DMSans-BoldItalic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'DMSans-Light';
+  src:  url('../fonts/DM_Sans/DMSans-Light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'DMSans-LightItalic';
+  src:  url('../fonts/DM_Sans/DMSans-LightItalic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'DMSans-Medium';
+  src:  url('../fonts/DM_Sans/DMSans-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'DMSans-MediumItalic';
+  src:  url('../fonts/DM_Sans/DMSans-MediumItalic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'DMSans-SemiBold';
+  src:  url('../fonts/DM_Sans/DMSans-SemiBold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'DMSans-SemiBoldItalic';
+  src:  url('../fonts/DM_Sans/DMSans-SemiBoldItalic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'DMSans-Medium', sans-serif;
+  background: $gray;
+}
+
+div#RFS-LabelContainer {
+  color: $secondary;
+  font-family: 'DMSans-SemiBold', sans-serif;
+  font-size: 16px;
+}
+button#RFS-StepButton.active, button#RFS-StepButton.completed {
+  background: $primary;
+  span {
+    color: $white;
+  }
+}
+span#RFS-Connector {
+  border-color: $primary;
+}
+.dropdown-toggle::after {
+  position: absolute;
+  right: 15px;
+  bottom: -6px;
+  border-top: 0.3em solid $primary;
+}
+.form-check-input:checked {
+  background-color: $primary;
+  border-color: $primary;
+}
+.files-ui-footer.files-ui-footer-border-rd-top-bg-color-default, .files-ui-header.files-ui-header-border-rd-default {
+  display: none;
+} 
+.files-ui-dropzone-extra-default {
+  border: 1px dashed $primary !important;
+}
+.files-ui-dropzone-children-container {
+  label {
+    font-size: 16px;
+    color: $secondary;
+    padding-top: 50px;
+    position: relative;
+    &::before {
+      content: "\e90d";
+      position: absolute;
+      top: -2rem;
+      left: 0;
+      right: 0;
+      font-size: 4rem;
+      color: $primary;
+      font-family: 'sigma';
+    }
+  }
+}
+
+.changeBorder {
+  .msl {
+    border: $border;
+    padding: 4px 10px;
+  }
+  .msl:not(.msl-active,.msl-active-up):hover {
+    border-color: $secondary;
+}
+}
+
+
+

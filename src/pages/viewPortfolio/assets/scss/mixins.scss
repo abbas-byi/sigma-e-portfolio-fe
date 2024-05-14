@@ -1,0 +1,46 @@
+@import "./variables.scss";
+
+@mixin textStyling {
+  &.light {
+    font-family: 'Nunito-Lights', sans-serif;
+  } 
+  &.medium {
+    font-family: 'Nunito-Medium', sans-serif;
+  } 
+  &.semiBold {
+    font-family: 'Nunito-SemiBold', sans-serif;
+  }
+  &.bold {
+    font-family: 'Nunito-Bold', sans-serif;
+  }
+  &.primary {
+    color: $primary;
+  }
+  &.primary1 {
+    color: $primary1;
+  }
+  &.primary2 {
+    color: $primary2;
+  }
+  &.dark {
+    color: $dark;
+  }
+  &.white {
+    color: $white;
+  }
+  &.gray {
+    color: $gray;
+  }
+  &.red {
+    color: $red;
+  }
+  &.green {
+    color: $green;
+  }
+  &.upperCase {
+    text-transform: uppercase;
+  }
+  &.underline {
+    text-decoration: underline;
+  }
+}

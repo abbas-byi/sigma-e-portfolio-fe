@@ -1,0 +1,38 @@
+@import '../../assets/scss/variables.scss';
+
+.button {
+    cursor: pointer;
+    border-radius: 5px;
+    width: 105px;
+    padding: 12px;
+    font-size: 16px;
+    line-height: 28px;
+    color: $white;
+    background: $primary;
+    font-family: 'Nunito-Semibold', sans-serif;
+    user-select: none;
+    transition: 0.2s;
+    border: 1px solid $primary;
+    &:hover {
+        background: $white;
+        color: $primary;
+    }
+    &.icon {
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+            i {
+                color: $primary;
+            }
+        }
+
+        i {
+            font-size: 24px;
+            color: $white;
+        }
+    }
+}
