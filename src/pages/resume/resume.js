@@ -4,12 +4,17 @@ import { Button, Card, Header, Icon, Sidebar, Text, Image } from "../../componen
 import { useResume } from "./useResume";
 import { ProtectedRoute } from "../../components/security/protectedRoute";
 import { useNavigate } from "react-router-dom";
+import { useGetResumeDetails } from "./useGetResumeDetails";
 
 const Resume = () => {
   const navigate = useNavigate();
   const ToResume = () => navigate("/resume/new-resume");
   const viewResume = () => navigate("/resume/view-resume")
   const { userDetails } = useResume();
+  const userId = sessionStorage.getItem('userId');
+  const token = sessionStorage.getItem('token')
+  const { getResumeDetails } = useGetResumeDetails(token, userId);
+  console.log('this is resume', getResumeDetails())
 
   return (
     <ProtectedRoute>
