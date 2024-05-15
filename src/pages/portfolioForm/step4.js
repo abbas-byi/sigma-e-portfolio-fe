@@ -1,6 +1,5 @@
 import React from "react";
-import { Button, Card, Icon, Input, Label } from "../../components";
-import { Dropzone, FileMosaic } from "@files-ui/react";
+import { Button, Card, Icon, Input, Label, FileDragZone } from "../../components";
 import "react-multiple-select-dropdown-lite/dist/index.css";
 import { usePortfolioForm } from "./usePortfolioForm";
 
@@ -15,9 +14,9 @@ const ActionButtons = (props) => {
   const handleNext = (e) => {
     e.preventDefault();
     if (onHandleNext) {
-      onHandleNext(); // Use the custom handler if provided
+      onHandleNext(); 
     } else {
-      props.nextStep(); // Default behavior
+      props.nextStep(); 
     }
   };
 
@@ -52,6 +51,7 @@ const ActionButtons = (props) => {
 };
 
 const Four = (props) => {
+  const { uploadFileToS3Bucket } = usePortfolioForm();
   const {
     portfolioDetails,
     handleChange,
@@ -59,10 +59,18 @@ const Four = (props) => {
     removeFile,
     nextStep,
   } = props;
-  const handleNext = () => {
-    // console.log("Current portfolio Details:", portfolioDetails);
-    nextStep();
+
+  const handleNext = async () => {
+    try {
+      if (portfolioDetails.certificate.length > 0) {
+        await uploadFileToS3Bucket(portfolioDetails.certificate, "certificate");
+      }
+      nextStep();
+    } catch (error) {
+      console.error("Error uploading files:", error);
+    }
   };
+
 
   return (
     <Card>
@@ -90,7 +98,7 @@ const Four = (props) => {
       </div>
       <div className="mt-3">
         <Label>Certificate</Label>
-        <Dropzone
+        {/*<Dropzone
           onChange={(files) => handleFileChange(files, "certificate")}
           value={portfolioDetails.certificate}
           name="certificate"
@@ -104,7 +112,10 @@ const Four = (props) => {
               preview
             />
           ))}
-        </Dropzone>
+        </Dropzone>*/}
+        <FileDragZone 
+        onFilesSelected = {(files) => handleFileChange(files, 'certificate')}
+        />
       </div>
       <ActionButtons {...props} onHandleNext={handleNext} />
     </Card>

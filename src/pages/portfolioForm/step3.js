@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Card, Icon, Input, Label } from "../../components";
+import { Button, Card, Icon, Input, Label, FileDragZone } from "../../components";
 import { Dropzone, FileMosaic } from "@files-ui/react";
 import MultiSelect from "react-multiple-select-dropdown-lite";
 import "react-multiple-select-dropdown-lite/dist/index.css";
@@ -53,6 +53,7 @@ const ActionButtons = (props) => {
 };
 
 const Three = (props) => {
+  const { uploadFileToS3Bucket } = usePortfolioForm();
   const {
     portfolioDetails,
     handleChange,
@@ -60,9 +61,19 @@ const Three = (props) => {
     removeFile,
     nextStep,
   } = props;
-  const handleNext = () => {
-    // console.log("Current portfolio Details:", portfolioDetails);
-    nextStep();
+
+  const handleNext = async () => {
+    try {
+      if (portfolioDetails.introVideo.length > 0) {
+        await uploadFileToS3Bucket(portfolioDetails.introVideo, "introVideo");
+      }
+      if (portfolioDetails.achievements.length > 0) {
+        await uploadFileToS3Bucket(portfolioDetails.achievements, "achievements");
+      }
+      nextStep();
+    } catch (error) {
+      console.error("Error uploading files:", error);
+    }
   };
 
   const techLanguagesOptios = [
@@ -86,7 +97,7 @@ const Three = (props) => {
     <Card>
       <div>
         <Label>Intro Video</Label>
-        <Dropzone
+        {/*<Dropzone
           onChange={(files) => handleFileChange(files, "introVideo")}
           value={portfolioDetails.introVideo}
           name="introVideo"
@@ -100,7 +111,10 @@ const Three = (props) => {
               preview
             />
           ))}
-        </Dropzone>
+        </Dropzone>*/}
+        <FileDragZone 
+        onFilesSelected={(files) => handleFileChange(files, 'introVideo')}
+        />
       </div>
       <div className="mt-3">
         <Label>Summary/ About me</Label>
@@ -130,7 +144,7 @@ const Three = (props) => {
       </div>
       <div className="mt-3">
         <Label>Certificates/ Achievements</Label>
-        <Dropzone
+        {/*<Dropzone
           onChange={(files) => handleFileChange(files, "achievements")}
           value={portfolioDetails.achievements}
           name="achievements"
@@ -144,7 +158,9 @@ const Three = (props) => {
               preview
             />
           ))}
-        </Dropzone>
+        </Dropzone>*/}
+        <FileDragZone 
+        onFilesSelected={(files) => handleFileChange(files, 'achievements')}/>
       </div>
       <div className="mt-3">
         <Label>Skills</Label>
@@ -153,13 +169,13 @@ const Three = (props) => {
           options={options}
           className="w-100 changeBorder"
           name="skills"
-          value={portfolioDetails.skills ? portfolioDetails.skills.join(',') : ''}
+          value={portfolioDetails.skills}
         />
       </div>
       <div className="mt-3">
         <Label>Tech Languages</Label>
         <MultiSelect
-          onChange={(value) => handleChange(value, 'Tech Skills')}
+          onChange={(value) => handleChange(value, 'techSkills')}
           options={techLanguagesOptios}
           className="w-100 changeBorder"
           name="languages"

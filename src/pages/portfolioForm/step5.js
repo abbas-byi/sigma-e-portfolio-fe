@@ -50,9 +50,10 @@ const Five = (props) => {
       handleFileChange,
       removeFile,
    } = props;
+   const { submitPortfolioDetails } = usePortfolioForm();
    const handleFinish = () => {
-    console.log("portfolio Details Are:", portfolioDetails);
     lastStep();
+    submitPortfolioDetails(portfolioDetails)
    }  
   return (
     <Card>

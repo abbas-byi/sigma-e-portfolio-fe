@@ -135,9 +135,6 @@ export const useResumeForm = () => {
   };
 
   const submitResumeDetails = async (data) => {
-    console.log("this is data", data);
-    // console.log('line 138', data.achievements.map((eachData) => eachData.url || 'empty'))
-    console.log('line 139', data.certificate.map((eachData) => String(eachData.url) || 'empty'))
     data = {
       ...data,
       profilePhoto: data.profilePhoto[0].url,
@@ -187,11 +184,8 @@ export const useResumeForm = () => {
         response = progress;
       });
       await upload.done();
-      console.log('Upload completed successfully!');
       return response;
     } catch (err) {
-      console.log("error", err);
-      alert("Error uploading file: ", err.message);
     }
   };
 
@@ -210,8 +204,6 @@ export const useResumeForm = () => {
     });
 
     const updatedFiles = await Promise.all(uploadPromises);
-
-    console.log("line 254", updatedFiles);
     setResumeDetails((prevDetails) => ({
       ...prevDetails,
       [fieldName]: updatedFiles.map((file) => file),

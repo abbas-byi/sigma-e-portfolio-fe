@@ -1,13 +1,11 @@
 import React from "react";
 import Styles from "../dashboard/dashboard.module.scss";
-import { Button, Card, Icon, Input, Label, Text } from "../../components";
-import { Dropzone, FileMosaic } from "@files-ui/react";
+import { Button, Card, Icon, Input, Label, Text,FileDragZone } from "../../components";
 import "react-multiple-select-dropdown-lite/dist/index.css";
 import { usePortfolioForm } from "./usePortfolioForm";
 
 const ActionButtons = (props) => {
-  const { onHandleNext } = props; // Custom handler for the Next button
-
+  const { onHandleNext } = props; 
   const handleBack = () => {
     props.previousStep();
   };
@@ -15,9 +13,9 @@ const ActionButtons = (props) => {
   const handleNext = (e) => {
     e.preventDefault();
     if (onHandleNext) {
-      onHandleNext(); // Use the custom handler if provided
+      onHandleNext();
     } else {
-      props.nextStep(); // Default behavior
+      props.nextStep();
     }
   };
 
@@ -52,6 +50,7 @@ const ActionButtons = (props) => {
 };
 
 const Two = (props) => {
+  const { uploadFileToS3Bucket } = usePortfolioForm();
   const {
     portfolioDetails,
     handleChange,
@@ -59,16 +58,32 @@ const Two = (props) => {
     handleFileChange,
     nextStep,
   } = props;
-  const handleNext = () => {
-    // console.log("Current Resume Details:", portfolioDetails);
-    nextStep(); // Move to the next step after logging
+
+  const handleNext = async () => {
+    try {
+      if (portfolioDetails.bannerPhoto.length > 0) {
+        await uploadFileToS3Bucket(portfolioDetails.bannerPhoto, "bannerPhoto");
+      }
+      if (portfolioDetails.profilePhoto.length > 0) {
+        await uploadFileToS3Bucket(portfolioDetails.profilePhoto, "profilePhoto");
+      }
+      nextStep();
+    } catch (error) {
+      console.error("Error uploading files:", error);
+    }
   };
 
   return (
     <Card>
       <div>
         <Label>Banner Photo/ Logo</Label>
-        <Dropzone
+        <FileDragZone 
+        onFilesSelected={(files) => handleFileChange(files, 'bannerPhoto')}
+        width='100%'
+        height='150px'
+        id ='bannerPhoto'
+        />
+        {/*<Dropzone
           onChange={(files) => handleFileChange(files, "bannerImage")}
           value={portfolioDetails.bannerImage}
           name="bannerImage"
@@ -82,11 +97,17 @@ const Two = (props) => {
               preview
             />
           ))}
-        </Dropzone>
+        </Dropzone>*/}
       </div>
       <div className="mt-3">
         <Label>Profile Picture</Label>
-        <Dropzone
+        <FileDragZone 
+        onFilesSelected={(files) => handleFileChange(files, 'profilePhoto')}
+        width='100%'
+        height='150px'
+        id ='profilePhoto'
+        />
+        {/*<Dropzone
           onChange={(files) => handleFileChange(files, "profilePhoto")}
           value={portfolioDetails.profilePhoto}
           name="profilePhoto"
@@ -100,7 +121,7 @@ const Two = (props) => {
               preview
             />
           ))}
-        </Dropzone>
+        </Dropzone>*/}
         <Text variant={"md"} color={"secondary"}>
           Use 400X400 size for better results
         </Text>

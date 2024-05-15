@@ -53,7 +53,7 @@ const One = (props) => {
   const { portfolioDetails, handleChange, nextStep } = props;
   const handleNext = () => {
     // console.log("Current Resume Details:", portfolioDetails);
-    nextStep(); // Move to the next step after logging
+    nextStep(); 
   };
   return (
     <Card>
@@ -111,7 +111,7 @@ const One = (props) => {
         <Input
           type={"text"}
           placeholder={"LinkedIn Profile URL"}
-          inputName={"likedinProfileUrl"}
+          inputName={"linkedInProfileUrl"}
           onChange={handleChange}
         />
       </div>
