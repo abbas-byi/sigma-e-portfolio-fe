@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Styles from "./resume.module.scss";
 import { Button, Card, Header, Icon, Sidebar, Text, Image } from "../../components";
 import { useResume } from "./useResume";
@@ -13,8 +13,7 @@ const Resume = () => {
   const { userDetails } = useResume();
   const userId = sessionStorage.getItem('userId');
   const token = sessionStorage.getItem('token')
-  const { getResumeDetails } = useGetResumeDetails(token, userId);
-  console.log('this is resume', getResumeDetails())
+  const { resumeDetails } = useGetResumeDetails(token, userId);
 
   return (
     <ProtectedRoute>
@@ -23,6 +22,7 @@ const Resume = () => {
         <div className={Styles.main}>
           <Header pageHeading={"Resume"} />
           <div className={Styles.cardGrid}>
+          {resumeDetails ? (
             <Card className={Styles.detailCard}>
               <div className={Styles.row}>
                 <div className={Styles.leftCol}>
@@ -47,10 +47,12 @@ const Resume = () => {
                 </Button>
               </div>
             </Card>
+          ): (
             <Card className={Styles.card} onClick={ToResume}>
               <Icon className={"icon-plus"} />
               <Text>Create New Resume</Text>
             </Card>
+          )}
           </div>
         </div>
       </div>

@@ -8,12 +8,18 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { useGetPortfolioDetails } from '../portfolio/useGetPortfolioDetails'
 
 function ViewPortfolio() {
   const [theme, setTheme] = useState('blue');
   // const [copied, setCopied] = useState(false);
   const [copiedStates, setCopiedStates] = useState({});
 
+
+  const userId = sessionStorage.getItem("userId");
+  const token = sessionStorage.getItem("token");
+  const { portfolioDetails } = useGetPortfolioDetails(token, userId);
+  console.log("line 30", portfolioDetails);
 
   const handleKeyPress = (event) => {
     if (event.key === 'r') {
@@ -56,19 +62,21 @@ function ViewPortfolio() {
       {/* Head */}
       <div className={Styles.header}>
         <div>
-          <Heading headingType={'h1'} headingText={'Prashant Dave'} color={'white'} />          
-          <div className='mt2'><Text variant={'md'} color={'white'}>Founder</Text></div>
-          <div><Text variant={'lg'} color={'white'} strong={'semiBold'}>eDesignGuru</Text></div>
+          <Heading headingType={'h1'} headingText={portfolioDetails?.name} color={'white'} />          
+          <div className='mt2'><Text variant={'md'} color={'white'}>{portfolioDetails?.jobTitle}</Text></div>
+          <div><Text variant={'lg'} color={'white'} strong={'semiBold'}>{portfolioDetails?.companyName}</Text></div>
         </div>
         <div className={Styles.profileImg}>
-          <Image src='/images/user.png' className={'w100'} />
+          <Image src={portfolioDetails?.profilePhoto || '/images/user.png'} className={'w100'} />
         </div>
       </div>
 
       {/* About Us */}
       <div className={Styles.about}>
         <Heading headingType={'h2'} headingText={'About Us'} color={'primary'} strong={'bold'} className={'mb1'} />
-        <Text variant={'lg'}><Text className={'aboutUs'}>eDesignGuru is a leading Website Design and Development company. We are located in Ahmedabad, Gujarat, India. Making attractive and easy to use websites has always been our main planning. We provide services in wide range of Website Design and Development, Graphic Design, Logo Design and Branding.</Text> <Link>Read More..</Link> <Icon className={'icon-Speaker'} onClick={handleReadText} /></Text> 
+        <Text variant={'lg'}><Text className={'aboutUs'}>
+        {portfolioDetails?.aboutMe}</Text> <Link>Read More..</Link> <Icon className={'icon-Speaker'} onClick={handleReadText} />
+        </Text> 
       </div>
 
       {/* Socail Details */}
@@ -83,7 +91,7 @@ function ViewPortfolio() {
           <Heading headingText={'Our Social Channels'} headingType={'h4'} />
           <div className={Styles.grid}>
             <div className={`${Styles.btn} ${Styles.facebook}`}><Image src='/images/facebook.svg' /><Text>Facebook</Text></div>
-            <div className={`${Styles.btn} ${Styles.linkedin}`}><Image src='/images/linkedin.svg' /><Text>LinkedIn</Text></div>
+            <a href={'https://'+portfolioDetails?.linkedInProfileUrl} target='_blank' style={{ textDecoration: 'none' }}><div className={`${Styles.btn} ${Styles.linkedin}`}><Image src='/images/linkedin.svg'/><Text>Linked In</Text></div></a>
             <div className={`${Styles.btn} ${Styles.twitter}`}><Image src='/images/twitter.svg' /><Text>Twitter</Text></div>
             <div className={`${Styles.btn} ${Styles.instagram}`}><Image src='/images/instagram.svg' /><Text>Instagram</Text></div>
           </div>

@@ -1,11 +1,18 @@
 import React from "react";
 import Styles from "../dashboard/dashboard.module.scss";
-import { Button, Card, Icon, Input, Label, Text,FileDragZone } from "../../components";
+import {
+  Button,
+  Card,
+  Icon,
+  Input,
+  Label,
+  Text,
+} from "../../components";
 import "react-multiple-select-dropdown-lite/dist/index.css";
 import { usePortfolioForm } from "./usePortfolioForm";
 
 const ActionButtons = (props) => {
-  const { onHandleNext } = props; 
+  const { onHandleNext } = props;
   const handleBack = () => {
     props.previousStep();
   };
@@ -50,7 +57,6 @@ const ActionButtons = (props) => {
 };
 
 const Two = (props) => {
-  const { uploadFileToS3Bucket } = usePortfolioForm();
   const {
     portfolioDetails,
     handleChange,
@@ -59,72 +65,47 @@ const Two = (props) => {
     nextStep,
   } = props;
 
-  const handleNext = async () => {
-    try {
-      if (portfolioDetails.bannerPhoto.length > 0) {
-        await uploadFileToS3Bucket(portfolioDetails.bannerPhoto, "bannerPhoto");
-      }
-      if (portfolioDetails.profilePhoto.length > 0) {
-        await uploadFileToS3Bucket(portfolioDetails.profilePhoto, "profilePhoto");
-      }
-      nextStep();
-    } catch (error) {
-      console.error("Error uploading files:", error);
-    }
+  const handleNext = () => {
+    nextStep();
   };
 
   return (
     <Card>
       <div>
-        <Label>Banner Photo/ Logo</Label>
-        <FileDragZone 
-        onFilesSelected={(files) => handleFileChange(files, 'bannerPhoto')}
-        width='100%'
-        height='150px'
-        id ='bannerPhoto'
+        <Label>Linked In</Label>
+        <Input
+          type={"text"}
+          placeholder={"Enter Linked In Url"}
+          inputName={"linkedInProfileUrl"}
+          onChange={handleChange}
         />
-        {/*<Dropzone
-          onChange={(files) => handleFileChange(files, "bannerImage")}
-          value={portfolioDetails.bannerImage}
-          name="bannerImage"
-        >
-          {portfolioDetails?.bannerImage?.map((file) => (
-            <FileMosaic
-              key={file.id}
-              {...file}
-              onDelete={removeFile}
-              info
-              preview
-            />
-          ))}
-        </Dropzone>*/}
       </div>
       <div className="mt-3">
-        <Label>Profile Picture</Label>
-        <FileDragZone 
-        onFilesSelected={(files) => handleFileChange(files, 'profilePhoto')}
-        width='100%'
-        height='150px'
-        id ='profilePhoto'
+        <Label>Facebook</Label>
+        <Input
+          type={"text"}
+          placeholder={"Enter Facebook Profile Url"}
+          inputName={"facebookProfileUrl"}
+          onChange={handleChange}
         />
-        {/*<Dropzone
-          onChange={(files) => handleFileChange(files, "profilePhoto")}
-          value={portfolioDetails.profilePhoto}
-          name="profilePhoto"
-        >
-          {portfolioDetails?.profilePhoto?.map((file) => (
-            <FileMosaic
-              key={file.id}
-              {...file}
-              onDelete={removeFile}
-              info
-              preview
-            />
-          ))}
-        </Dropzone>*/}
-        <Text variant={"md"} color={"secondary"}>
-          Use 400X400 size for better results
-        </Text>
+      </div>
+      <div className="mt-3">
+        <Label>Twitter or X</Label>
+        <Input
+          type={"text"}
+          placeholder={"Enter Twitter or X Url"}
+          inputName={"twitterProfileUrl"}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="mt-3">
+        <Label>Instagram</Label>
+        <Input
+          type={"text"}
+          placeholder={"Enter instagram Profile Url"}
+          inputName={"instagramProfileUrl"}
+          onChange={handleChange}
+        />
       </div>
       <div className="mt-3">
         <Label>Select Theme Colour</Label>

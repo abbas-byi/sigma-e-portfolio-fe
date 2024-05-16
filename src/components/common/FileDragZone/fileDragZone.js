@@ -3,7 +3,7 @@ import { AiOutlineCheckCircle, AiOutlineCloudUpload } from "react-icons/ai";
 import { MdClear } from "react-icons/md";
 import "./fileDragZone.scss";
 
-const FileDragZone = ({ onFilesSelected = () => {}, width, height }) => {
+const FileDragZone = ({ onFilesSelected = () => {}, width = '100%', height = '200px' }) => {
   const [files, setFiles] = useState([]);
 
   const handleFileChange = (event) => {
@@ -37,6 +37,7 @@ const FileDragZone = ({ onFilesSelected = () => {}, width, height }) => {
         className={`document-uploader ${
           files.length > 0 ? "upload-box active" : "upload-box"
         }`}
+        style={{ width: width, height: height }}
         onDrop={handleDrop}
         onDragOver={(event) => event.preventDefault()}
       >

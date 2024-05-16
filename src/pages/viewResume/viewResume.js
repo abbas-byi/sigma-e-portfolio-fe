@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Styles from "./viewResume.module.scss";
 import { Icon, Image, Link, Text } from "./components";
 import "./assets/scss/styles.scss";
+import "./viewResume.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -9,57 +10,67 @@ import "swiper/css/pagination";
 import { ProtectedRoute } from "../../components/security/protectedRoute";
 import Sidebar from "../../components/common/sidebar";
 import Header from "../../components/common/header";
+import { useGetResumeDetails } from "../resume/useGetResumeDetails";
 
 function ViewResume() {
-  const [theme, setTheme] = useState("blue");
+  const [theme, setTheme] = useState("");
 
-  const handleKeyPress = (event) => {
-    if (event.key === "r") {
-      setTheme("red");
-    } else if (event.key === "g") {
-      setTheme("green");
-    } else {
-      setTheme("blue");
-    }
-  };
+  const userId = sessionStorage.getItem("userId");
+  const token = sessionStorage.getItem("token");
+  const { resumeDetails } = useGetResumeDetails(token, userId);
+  console.log("line 30", resumeDetails);
+  useEffect(() => {
+    setTheme(resumeDetails?.theme);
+  }, [resumeDetails]);
 
   return (
     <ProtectedRoute>
-      <div style={{ padding: 1.5 + 'rem' }}>
+      <div style={{ padding: 1.5 + "rem" }}>
         <Sidebar />
-        <div style={{ marginLeft: 290 + 'px', paddingLeft: 1 + 'rem' }}>
+        <div style={{ marginLeft: 290 + "px", paddingLeft: 1 + "rem" }}>
           <Header pageHeading={"Resume"} />
-      
+
           <div
-            className={`${Styles.app} theme`}
+            className={`${Styles.app} ${Styles.theme}`}
             data-theme={theme}
-            onKeyDown={handleKeyPress}
             tabIndex="0"
           >
             {/* Head */}
             <div className={Styles.header}>
               <div className={Styles.profileImg}>
-                <Image src="/images/User-new.png" className={"w100"} />
+                <Image
+                  src={resumeDetails?.profilePhoto || "/images/User-new.png"}
+                  className={"profilePhoto"}
+                />
               </div>
               <div className={Styles.contentBox}>
                 <div className={Styles.content}>
-                  <h1>Kaylee Ferguson</h1>
-                  <h5>UI/UX Designer</h5>
+                  <h1>{resumeDetails?.name}</h1>
+                  <h5>{resumeDetails?.jobTitle}</h5>
                   <div className={Styles.divider}>
                     <div className={Styles.dividerFirst}></div>
                     <div className={Styles.dividersec}></div>
                   </div>
                   <div className={Styles.social}>
                     <div>
-                      <Image src="/images/linkedin.svg" />
+                      <a
+                        href={"https://" + resumeDetails?.linkedInProfileUrl}
+                        target="_blank"
+                      >
+                        <Image src="/images/linkedin.svg" />
+                      </a>
                       <Text>Linkedin</Text>
                     </div>
                     <div>
-                      <Image src="/images/mail.svg" />
+                      <a href={"mailto:" + resumeDetails?.email}>
+                        <Image src="/images/mail.svg" />
+                      </a>
                       <Text>Email</Text>
                     </div>
                     <div>
-                      <Image src="/images/phone.svg" />
+                      <a href={"tel:" + resumeDetails?.phone}>
+                        <Image src="/images/phone.svg" />
+                      </a>
                       <Text>Phone</Text>
                     </div>
                   </div>
@@ -70,8 +81,10 @@ function ViewResume() {
             {/* Video */}
             <div className={Styles.video}>
               <video width="100%" height="215" poster="/images/video-image.png">
-                <source src="movie.mp4" type="video/mp4" />
-                <source src="movie.ogg" type="video/ogg" />
+                <source
+                  src={resumeDetails?.introVideo || "movie.mp4"}
+                  type="video/mp4"
+                />
                 Your browser does not support the video tag.
               </video>
 
@@ -109,14 +122,8 @@ function ViewResume() {
                 <div className={Styles.about}>
                   <h2 className={Styles.title}>About Us</h2>
                   <Text variant={"lg"}>
-                    <Text className={"aboutUs"}>
-                      eDesignGuru is a leading Website Design and Development
-                      company. We are located in Ahmedabad, Gujarat, India. Making
-                      attractive and easy to use websites has always been our main
-                      planning. We provide services in wide range of Website Design
-                      and Development, Graphic Design, Logo Design and Branding.
-                    </Text>{" "}
-                    <Link>Read More..</Link>
+                    <Text className={"aboutUs"}>{resumeDetails?.aboutMe}</Text>{" "}
+                    {/* <Link>Read More..</Link> */}
                   </Text>
                 </div>
               </div>
@@ -127,16 +134,19 @@ function ViewResume() {
                   <ul className={Styles.list}>
                     <li>
                       <div className={Styles.marker}></div>
-                      <h6>Master of Computer Applications</h6>
-                      <p>Devi Ahilya Vishwavidyalaya University, Indore</p>
-                      <div className={Styles.year}>2020 - 2022</div>
+                      <h6>{resumeDetails?.courseName}</h6>
+                      <p>{resumeDetails?.universityName}</p>
+                      <div className={Styles.year}>
+                        {resumeDetails?.courseStartYear.split("-")[0]} -{" "}
+                        {resumeDetails?.courseEndYear.split("-")[0]}
+                      </div>
                     </li>
-                    <li>
+                    {/*<li>
                       <div className={Styles.marker}></div>
                       <h6>Master of Computer Applications</h6>
                       <p>Devi Ahilya Vishwavidyalaya University, Indore</p>
                       <div className={Styles.year}>2020 - 2022</div>
-                    </li>
+  </li>*/}
                   </ul>
                 </div>
               </div>
@@ -147,26 +157,24 @@ function ViewResume() {
                   <ul className={Styles.list}>
                     <li>
                       <div className={Styles.marker}></div>
-                      <div className={Styles.year}>Nov 2019 - Present</div>
-                      <h6>Sr. Php Developer, Google Inc</h6>
-                      <p>
-                        During my time at Google, I worked and several large scale
-                        projects for clients. The products are management
-                        applications used by our client for all their operations
-                        process.
-                      </p>
+                      <div className={Styles.year}>
+                        {resumeDetails?.workingStartYear.split("-")[0]} -{" "}
+                        {resumeDetails?.workingEndYear.split("-")[0]}
+                      </div>
+                      <h6>{resumeDetails?.userCompanyProfile}</h6>
+                      <p>{resumeDetails?.details}</p>
                     </li>
-                    <li>
+                    {/*<li>
                       <div className={Styles.marker}></div>
                       <div className={Styles.year}>Nov 2019 - Present</div>
                       <h6>Sr. Php Developer, Google Inc</h6>
                       <p>
-                        During my time at Google, I worked and several large scale
-                        projects for clients. The products are management
+                        During my time at Google, I worked and several large
+                        scale projects for clients. The products are management
                         applications used by our client for all their operations
                         process.
                       </p>
-                    </li>
+                      </li>*/}
                   </ul>
                 </div>
               </div>
@@ -176,47 +184,16 @@ function ViewResume() {
                   <h2 className={Styles.title}>Projects</h2>
                   <div className={Styles.projectBox}>
                     <div>
-                      <div className={Styles.projectName}>Project Name</div>
+                      <div className={Styles.projectName}>
+                        {resumeDetails?.projectName}
+                      </div>
                       <div className={Styles.projectDescription}>
-                        Project Description..
+                        {resumeDetails?.projectDescription}
                       </div>
                     </div>
-                    <div className={Styles.icon}>
+                    {/*<div className={Styles.icon}>
                       <Image src="/images/arrow-down-right.svg" />
-                    </div>
-                  </div>
-                  <div className={Styles.projectBox}>
-                    <div>
-                      <div className={Styles.projectName}>Project Name</div>
-                      <div className={Styles.projectDescription}>
-                        Project Description..
-                      </div>
-                    </div>
-                    <div className={Styles.icon}>
-                      <Image src="/images/arrow-down-right.svg" />
-                    </div>
-                  </div>
-                  <div className={Styles.projectBox}>
-                    <div>
-                      <div className={Styles.projectName}>Project Name</div>
-                      <div className={Styles.projectDescription}>
-                        Project Description..
-                      </div>
-                    </div>
-                    <div className={Styles.icon}>
-                      <Image src="/images/arrow-down-right.svg" />
-                    </div>
-                  </div>
-                  <div className={Styles.projectBox}>
-                    <div>
-                      <div className={Styles.projectName}>Project Name</div>
-                      <div className={Styles.projectDescription}>
-                        Project Description..
-                      </div>
-                    </div>
-                    <div className={Styles.icon}>
-                      <Image src="/images/arrow-down-right.svg" />
-                    </div>
+  </div>*/}
                   </div>
                 </div>
               </div>
@@ -305,32 +282,20 @@ function ViewResume() {
 
             {/* Document */}
             <div className={Styles.document}>
-              <h2 className={Styles.title}>Document</h2>
+              <h2 className={Styles.title}>Documents</h2>
               <Swiper
                 slidesPerView={2.8}
                 spaceBetween={30}
                 className={Styles.mySwiper}
               >
-                <SwiperSlide className={Styles.documentSlide}>
-                  <Image src="/images/pdf.png" />
-                  Experience letter.pdf
-                </SwiperSlide>
-                <SwiperSlide className={Styles.documentSlide}>
-                  <Image src="/images/pdf.png" />
-                  Appraisal letter.pdf
-                </SwiperSlide>
-                <SwiperSlide className={Styles.documentSlide}>
-                  <Image src="/images/pdf.png" />
-                  Experience letter.pdf
-                </SwiperSlide>
-                <SwiperSlide className={Styles.documentSlide}>
-                  <Image src="/images/pdf.png" />
-                  Experience letter.pdf
-                </SwiperSlide>
-                <SwiperSlide className={Styles.documentSlide}>
-                  <Image src="/images/pdf.png" />
-                  Experience letter.pdf
-                </SwiperSlide>
+                {resumeDetails?.certificate.map((eachCertificate) => (
+                  <SwiperSlide className={Styles.documentSlide}>
+                    <Image
+                      src={eachCertificate || "/images/pdf.png"}
+                      className={"certificate-img"}
+                    />
+                  </SwiperSlide>
+                ))}
               </Swiper>
             </div>
 
@@ -344,24 +309,11 @@ function ViewResume() {
                   slidesPerView={"auto"}
                   spaceBetween={30}
                 >
-                  <SwiperSlide>
-                    <div className={Styles.box}>JavaScript</div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className={Styles.box}>JavaScript</div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className={Styles.box}>JavaScript</div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className={Styles.box}>JavaScript</div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className={Styles.box}>JavaScript</div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className={Styles.box}>JavaScript</div>
-                  </SwiperSlide>
+                  {resumeDetails?.techSkills.map((eachSkill) => (
+                    <SwiperSlide>
+                      <div className={Styles.box}>{eachSkill}</div>
+                    </SwiperSlide>
+                  ))}
                 </Swiper>
               </div>
               <div className={Styles.soft}>
@@ -371,24 +323,11 @@ function ViewResume() {
                   slidesPerView={"auto"}
                   spaceBetween={30}
                 >
-                  <SwiperSlide>
-                    <div className={Styles.box}>JavaScript</div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className={Styles.box}>JavaScript</div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className={Styles.box}>JavaScript</div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className={Styles.box}>JavaScript</div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className={Styles.box}>JavaScript</div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className={Styles.box}>JavaScript</div>
-                  </SwiperSlide>
+                  {resumeDetails?.skills.map((eachSkill) => (
+                    <SwiperSlide>
+                      <div className={Styles.box}>{eachSkill}</div>
+                    </SwiperSlide>
+                  ))}
                 </Swiper>
               </div>
             </div>

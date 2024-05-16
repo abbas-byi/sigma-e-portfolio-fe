@@ -74,6 +74,16 @@ button {
 .w100 {
   width: 100%;
 }
+.profilePhoto {
+  width: 430px;
+  height: 421px;
+  object-fit: 1/2;
+}
+.certificate-img{
+  width: 138px;
+  height: 145px;
+  object-fit: cover;
+}
 .mt1 {
   margin-top: 10px;
 }

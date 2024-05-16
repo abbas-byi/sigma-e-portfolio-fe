@@ -83,20 +83,20 @@ const Three = (props) => {
   };
 
   const techLanguagesOptios = [
-    { label: "JavaScript", value: "javascript" },
-    { label: "React JS", value: "react_js" },
-    { label: "Node JS", value: "node_js" },
-    { label: "Next JS", value: "next_js" },
-    { label: "HTML5", value: "html_5" },
-    { label: "CSS 3", value: "css_3" },
-    { label: "Tailwind CSS", value: "tailwind_css" },
+    { label: "JavaScript", value: "JavaScript" },
+    { label: "React JS", value: "React JS" },
+    { label: "Node JS", value: "Node JS" },
+    { label: "Next JS", value: "Next JS" },
+    { label: "HTML5", value: "HTML5" },
+    { label: "CSS 3", value: "CSS 3" },
+    { label: "Tailwind CSS", value: "Tailwind CSS" },
   ];
 
   const options = [
-    { label: "English", value: "english" },
-    { label: "Hindi", value: "hindi" },
-    { label: "Arabic", value: "arabic" },
-    { label: "Gujrati", value: "gujrati" },
+    { label: "English", value: "English" },
+    { label: "Hindi", value: "Hindi" },
+    { label: "Arabic", value: "Arabic" },
+    { label: "Gujrati", value: "Gujrati" },
   ];
 
   return (

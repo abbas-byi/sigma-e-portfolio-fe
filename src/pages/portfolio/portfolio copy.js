@@ -11,6 +11,9 @@ const Portfolio = () => {
   const ToPortfolio = () => navigate("/portfolio/new-portfolio");
   const viewPortfolio = () => navigate("/portfolio/view-portfolio");
   const { userDetails } = usePortfolio();
+  const userId = sessionStorage.getItem('userId');
+  const token = sessionStorage.getItem('token');
+  const { portfolioDetails } = useGetPortfolioDetails(token, userId);
 
   return (
     <ProtectedRoute>
@@ -19,6 +22,7 @@ const Portfolio = () => {
         <div className={Styles.main}>
           <Header pageHeading={"Portfolio"} />
           <div className={Styles.cardGrid}>
+            {portfolioDetails ? (
               <Card className={Styles.detailCard}>
                 <div className={Styles.row}>
                   <div className={Styles.leftCol}>
@@ -43,10 +47,12 @@ const Portfolio = () => {
                   </Button>
                 </div>
               </Card>
+            ) : (
               <Card className={Styles.card} onClick={ToPortfolio}>
                 <Icon className={"icon-plus"} />
                 <Text>Create New Portfolio</Text>
               </Card>
+            )}
           </div>
         </div>
       </div>

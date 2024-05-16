@@ -64,122 +64,126 @@ const Three = (props) => {
 
   const handleNext = async () => {
     try {
-      if (portfolioDetails.introVideo.length > 0) {
-        await uploadFileToS3Bucket(portfolioDetails.introVideo, "introVideo");
+      if (portfolioDetails.serviceOneImage.length > 0) {
+        await uploadFileToS3Bucket(portfolioDetails.serviceOneImage, "serviceOneImage");
       }
-      if (portfolioDetails.achievements.length > 0) {
-        await uploadFileToS3Bucket(portfolioDetails.achievements, "achievements");
+      if (portfolioDetails.serviceTwoImage.length > 0) {
+        await uploadFileToS3Bucket(portfolioDetails.serviceTwoImage, "serviceTwoImage");
       }
-      nextStep();
+      if (portfolioDetails.serviceThreeImage.length > 0) {
+        await uploadFileToS3Bucket(portfolioDetails.serviceThreeImage, "serviceThreeImage");
+      }
     } catch (error) {
       console.error("Error uploading files:", error);
     }
+    nextStep();
   };
-
-  const techLanguagesOptios = [
-    { label: "JavaScript", value: "javascript" },
-    { label: "React JS", value: "react_js" },
-    { label: "Node JS", value: "node_js" },
-    { label: "Next JS", value: "next_js" },
-    { label: "HTML5", value: "html_5" },
-    { label: "CSS 3", value: "css_3" },
-    { label: "Tailwind CSS", value: "tailwind_css" },
-  ];
-
-  const options = [
-    { label: "English", value: "english" },
-    { label: "Hindi", value: "hindi" },
-    { label: "Arabic", value: "arabic" },
-    { label: "Gujrati", value: "gujrati" },
-  ];
 
   return (
     <Card>
       <div>
-        <Label>Intro Video</Label>
-        {/*<Dropzone
-          onChange={(files) => handleFileChange(files, "introVideo")}
-          value={portfolioDetails.introVideo}
-          name="introVideo"
-        >
-          {portfolioDetails?.introVideo?.map((file) => (
-            <FileMosaic
-              key={file.id}
-              {...file}
-              onDelete={removeFile}
-              info
-              preview
-            />
-          ))}
-        </Dropzone>*/}
+        <Label>Service One</Label>
         <FileDragZone 
-        onFilesSelected={(files) => handleFileChange(files, 'introVideo')}
+        onFilesSelected={(files) => handleFileChange(files, 'serviceOneImage')}
+        height="150px"
+        className="mt-3"
         />
       </div>
       <div className="mt-3">
-        <Label>Summary/ About me</Label>
-        <Input
-          type={"textarea"}
-          rows={4}
-          onChange={handleChange}
-          inputName={"aboutMe"}
-        />
-      </div>
-      <div className="mt-3">
-        <Label>Project Name</Label>
+        <Label>Service Name</Label>
         <Input
           type={"text"}
           onChange={handleChange}
-          inputName={"projectName"}
+          inputName={"serviceOneName"}
         />
       </div>
       <div className="mt-3">
-        <Label>Project Description</Label>
+        <Label>Service Description</Label>
         <Input
           type={"textarea"}
           rows={4}
           onChange={handleChange}
-          inputName={"projectDescription"}
+          inputName={"serviceOneDescription"}
         />
       </div>
       <div className="mt-3">
-        <Label>Certificates/ Achievements</Label>
-        {/*<Dropzone
-          onChange={(files) => handleFileChange(files, "achievements")}
-          value={portfolioDetails.achievements}
-          name="achievements"
-        >
-          {portfolioDetails?.achievements?.map((file) => (
-            <FileMosaic
-              key={file.id}
-              {...file}
-              onDelete={removeFile}
-              info
-              preview
-            />
-          ))}
-        </Dropzone>*/}
+        <Label>Service Price</Label>
+        <Input
+          type={"text"}
+          onChange={handleChange}
+          inputName={"serviceOnePrice"}
+        />
+      </div>
+      <div className="mt-4" >
+      <hr />
+      </div>
+      <div className="mt-4">
+        <Label>Service Two</Label>
         <FileDragZone 
-        onFilesSelected={(files) => handleFileChange(files, 'achievements')}/>
-      </div>
-      <div className="mt-3">
-        <Label>Skills</Label>
-        <MultiSelect
-          onChange={(value) => handleChange(value, 'skills')}
-          options={options}
-          className="w-100 changeBorder"
-          name="skills"
-          value={portfolioDetails.skills}
+        onFilesSelected={(files) => handleFileChange(files, 'serviceTwoImage')}
+        height="150px"
+        className="mt-3"
         />
       </div>
       <div className="mt-3">
-        <Label>Tech Languages</Label>
-        <MultiSelect
-          onChange={(value) => handleChange(value, 'techSkills')}
-          options={techLanguagesOptios}
-          className="w-100 changeBorder"
-          name="languages"
-          value={portfolioDetails.languages}
+        <Label>Service Name</Label>
+        <Input
+          type={"text"}
+          onChange={handleChange}
+          inputName={"serviceTwoName"}
+        />
+      </div>
+      <div className="mt-3">
+        <Label>Service Description</Label>
+        <Input
+          type={"textarea"}
+          rows={4}
+          onChange={handleChange}
+          inputName={"serviceTwoDescription"}
+        />
+      </div>
+      <div className="mt-3">
+        <Label>Service Price</Label>
+        <Input
+          type={"text"}
+          onChange={handleChange}
+          inputName={"serviceTwoPrice"}
+        />
+      </div>
+      <div className="mt-4" >
+      <hr />
+      </div>
+      <div className="mt-4">
+        <Label>Service Three</Label>
+        <FileDragZone 
+        onFilesSelected={(files) => handleFileChange(files, 'serviceThreeImage')}
+        height="150px"
+        className="mt-3"
+        />
+      </div>
+      <div className="mt-3">
+        <Label>Service Name</Label>
+        <Input
+          type={"text"}
+          onChange={handleChange}
+          inputName={"serviceThreeName"}
+        />
+      </div>
+      <div className="mt-3">
+        <Label>Service Description</Label>
+        <Input
+          type={"textarea"}
+          rows={4}
+          onChange={handleChange}
+          inputName={"serviceThreeDescription"}
+        />
+      </div>
+      <div className="mt-3">
+        <Label>Service Price</Label>
+        <Input
+          type={"text"}
+          onChange={handleChange}
+          inputName={"serviceThreePrice"}
         />
       </div>
       <ActionButtons {...props} onHandleNext={handleNext} />

@@ -62,59 +62,32 @@ const Four = (props) => {
 
   const handleNext = async () => {
     try {
-      if (portfolioDetails.certificate.length > 0) {
-        await uploadFileToS3Bucket(portfolioDetails.certificate, "certificate");
+      if (portfolioDetails.videos.length > 0) {
+        await uploadFileToS3Bucket(portfolioDetails.videos, "videos");
+      }if (portfolioDetails.galleryImages.length > 0) {
+        await uploadFileToS3Bucket(portfolioDetails.galleryImages, "galleryImages");
       }
-      nextStep();
     } catch (error) {
       console.error("Error uploading files:", error);
     }
+    nextStep();
   };
 
 
   return (
     <Card>
-      <div>
-        <Label>Course Name</Label>
-        <Input type={"text"} onChange={handleChange} inputName="courseName" />
-      </div>
       <div className="mt-3">
-        <Label>University/School Name</Label>
-        <Input type={"text"} onChange={handleChange} inputName="universityName" />
-      </div>
-      <div className="row">
-        <div className="mt-3 col-sm-6">
-          <Label>Start Year</Label>
-          <Input type={"date"} rows={3} onChange={handleChange} inputName="courseStartYear" />
-        </div>
-        <div className="mt-3 col-sm-6">
-          <Label>End Year</Label>
-          <Input type={"date"} rows={3} onChange={handleChange} inputName="courseEndYear" />
-        </div>
-      </div>
-      <div className="mt-3">
-        <Label>Percentage</Label>
-        <Input type={"number"} onChange={handleChange} inputName="percentage" />
-      </div>
-      <div className="mt-3">
-        <Label>Certificate</Label>
-        {/*<Dropzone
-          onChange={(files) => handleFileChange(files, "certificate")}
-          value={portfolioDetails.certificate}
-          name="certificate"
-        >
-          {portfolioDetails?.certificate?.map((file) => (
-            <FileMosaic
-              key={file.id}
-              {...file}
-              onDelete={removeFile}
-              info
-              preview
-            />
-          ))}
-        </Dropzone>*/}
+        <Label >Videos</Label>
         <FileDragZone 
-        onFilesSelected = {(files) => handleFileChange(files, 'certificate')}
+        onFilesSelected = {(files) => handleFileChange(files, 'videos')}
+        height="200px"
+        />
+      </div>
+      <div className="mt-3">
+        <Label>Gallery Images</Label>
+        <FileDragZone 
+        onFilesSelected = {(files) => handleFileChange(files, 'galleryImages')}
+        height="200px"
         />
       </div>
       <ActionButtons {...props} onHandleNext={handleNext} />

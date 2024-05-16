@@ -98,15 +98,15 @@ const One = (props) => {
         />
       </div>
       <div className="mt-3">
-        <Label>Job Title</Label>
+        <Label>Designation</Label>
         <Input
           type={"text"}
-          placeholder={"Enter Title"}
-          inputName={"jobTitle"}
+          placeholder={"Enter Designation Title"}
+          inputName={"designation"}
           onChange={handleChange}
         />
       </div>
-      <div className="mt-3">
+      {/*<div className="mt-3">
         <Label>LinkedIn Profile</Label>
         <Input
           type={"text"}
@@ -114,7 +114,7 @@ const One = (props) => {
           inputName={"linkedInProfileUrl"}
           onChange={handleChange}
         />
-      </div>
+  </div>*/}
       <ActionButtons {...props} onHandleNext={handleNext} />
     </Card>
   );

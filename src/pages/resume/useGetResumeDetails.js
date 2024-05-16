@@ -1,6 +1,8 @@
 import axios from "axios";
+import { useEffect, useState } from "react";
 
 export const useGetResumeDetails = (token, userId) => {
+  const [resumeDetails, setResumeDetails] = useState()
   const getResumeDetails = () => {
     axios({
       method: "GET",
@@ -9,12 +11,17 @@ export const useGetResumeDetails = (token, userId) => {
         Authorization: `Bearer ${token}`,
       },
     }).then((res) => {
-      console.log('this is response', res)
+      setResumeDetails(res.data);
+      console.log('this is e-resume response', res.data)
     }).catch((e) => {
       console.log('this is error', e)
     })
   }
+
+  useEffect(() => {
+    getResumeDetails()
+  }, [token])
   return {
-    getResumeDetails,
+    resumeDetails,
   };
 };

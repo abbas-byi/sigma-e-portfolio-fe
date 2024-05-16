@@ -2,10 +2,10 @@ import React from "react";
 import { Button, Card, Icon, Input, Label } from "../../components";
 import "react-multiple-select-dropdown-lite/dist/index.css";
 import { usePortfolioForm } from "./usePortfolioForm";
+import { useNavigate } from "react-router-dom";
 
 const ActionButtons = (props) => {
-
-  const {onhandleFinish} = props; 
+  const { onhandleFinish } = props;
 
   const handleBack = (e) => {
     e.preventDefault();
@@ -14,15 +14,14 @@ const ActionButtons = (props) => {
 
   const handleFinish = (e) => {
     e.preventDefault();
-    if(onhandleFinish){
+    if (onhandleFinish) {
       onhandleFinish();
-    }else{
+    } else {
       props.lastStep();
     }
     // props.lastStep();
-    // handleSubmit(); 
+    // handleSubmit();
   };
-  
 
   return (
     <div className="d-flex align-items-center justify-content-between mt-5">
@@ -43,43 +42,58 @@ const ActionButtons = (props) => {
 };
 
 const Five = (props) => {
+  const navigate = useNavigate();
   const {
-     portfolioDetails,
-      handleChange,
-      lastStep,
-      handleFileChange,
-      removeFile,
-   } = props;
-   const { submitPortfolioDetails } = usePortfolioForm();
-   const handleFinish = () => {
+    portfolioDetails,
+    handleChange,
+    lastStep,
+    handleFileChange,
+    removeFile,
+  } = props;
+  const { submitPortfolioDetails } = usePortfolioForm();
+  const handleFinish = async () => {
     lastStep();
-    submitPortfolioDetails(portfolioDetails)
-   }  
+    try {
+      submitPortfolioDetails(portfolioDetails);
+      navigate("./portfolio");
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <Card>
       <div>
-        <Label>Company’s Name</Label>
-        <Input type={"text"} onChange={handleChange} inputName="companyName" />
+        <Label>Google Pay</Label>
+        <Input type={"text"} onChange={handleChange} inputName="googlePayUPIId" placeholder={'Enter Google Pay UPI Id'} />
       </div>
       <div className="mt-3">
-        <Label>Profile</Label>
-        <Input type={"text"} onChange={handleChange} inputName="userComapnyProfile" />
-      </div>
-      <div className="row">
-        <div className="mt-3 col-lg-6">
-          <Label>Start Year</Label>
-          <Input type={"date"} onChange={handleChange} inputName="workingStartYear" />
-        </div>
-        <div className="mt-3 col-lg-6">
-          <Label>End Year</Label>
-          <Input type={"date"} onChange={handleChange} inputName="workingEndYear" />
-        </div>
+        <Label>Phone Pay</Label>
+        <Input
+          type={"text"}
+          onChange={handleChange}
+          inputName="phonePayUPIID"
+          placeholder={'Enter Phone Pay UPI Id'}
+        />
       </div>
       <div className="mt-3">
-        <Label>Detail</Label>
-        <Input type={"textarea"} onChange={handleChange} inputName="details" />
+        <Label>Paytm Pay</Label>
+        <Input
+          type={"text"}
+          onChange={handleChange}
+          inputName="paytmUPIId"
+          placeholder={'Enter Paytm UPI Id'}
+        />
       </div>
-      <ActionButtons {...props} onhandleFinish={handleFinish}/>
+      <div className="mt-3">
+        <Label>Amazone Pay</Label>
+        <Input
+          type={"text"}
+          onChange={handleChange}
+          inputName="amazonPayUPIId"
+          placeholder={'Enter Amazone Pay UPI Id'}
+        />
+      </div>
+      <ActionButtons {...props} onhandleFinish={handleFinish} />
     </Card>
   );
 };

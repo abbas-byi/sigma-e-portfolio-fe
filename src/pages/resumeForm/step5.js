@@ -50,11 +50,11 @@ const Five = (props) => {
       handleFileChange,
       removeFile,
    } = props;
-   const { submitResumeDetails } = useResumeForm();
-   const handleFinish = () => {
+   const { submitResumeDetails } = useResumeForm(); 
+  const handleFinish = () => {
     lastStep();
     submitResumeDetails(resumeDetails)
-   }  
+   } 
   return (
     <Card>
       <div>

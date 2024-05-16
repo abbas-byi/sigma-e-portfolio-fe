@@ -2,22 +2,26 @@
     --primary: #1B367B;
     --primary1: #001958;
     --primary2: #244390;
+    --primary3: #1B367B;
 }
 .theme[data-theme="red"] {
     --primary: #cb0505;
     --primary1: #580000;
     --primary2: #902424;
+    --primary3: #cb0505;
 }
 .theme[data-theme="green"] {
     --primary: #009a27;
     --primary1: #00691b;
     --primary2: #00b12d;
+    --primary3: #009a27;
 }
 
 // Colors
 $primary: var(--primary);
 $primary1: var(--primary1);
 $primary2: var(--primary2);
+$primary3: var(--primary3);
 $white:#ffffff;
 $dark:#555555;
 $gray:#D0D0D0;

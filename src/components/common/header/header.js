@@ -24,7 +24,7 @@ const Header = ({pageHeading}) => {
                     <div className={`dropdown-toggle ${Styles.toggle}`} data-bs-toggle="dropdown" aria-expanded="false">
                         <Image src='/images/avatar.png' />
                     </div>
-                    <ul className={`${Styles.dropdown} dropdown-menu`}>
+                    <ul className={`${Styles.dropdown} dropdown-menu mt-2`}>
                         <li>Account settings</li>
                         <li onClick={()=>navigate('/subscribe')}>Subscription</li>
                         <li>Support</li>

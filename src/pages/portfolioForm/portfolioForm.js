@@ -61,10 +61,10 @@ const PortfolioForm = () => {
                     label="Basic Details"
                     className={`${Styles.stepView}`}
                   />
-                  <Step label="Home Page" className={`${Styles.stepView}`} />
-                  <Step label="E-Portfolio" className={`${Styles.stepView}`} />
-                  <Step label="Education" className={`${Styles.stepView}`} />
-                  <Step label="Experience " className={`${Styles.stepView}`} />
+                  <Step label="Social Profiles" className={`${Styles.stepView}`} />
+                  <Step label="Services" className={`${Styles.stepView}`} />
+                  <Step label="Media" className={`${Styles.stepView}`} />
+                  <Step label="Payments" className={`${Styles.stepView}`} />
                 </Stepper>
                 <Button variant={"main"} className={Styles.skipSave}>
                   Skip & Save
