@@ -193,92 +193,11 @@ function ViewResume() {
                     </div>
                     {/*<div className={Styles.icon}>
                       <Image src="/images/arrow-down-right.svg" />
-  </div>*/}
+                    </div>*/}
                   </div>
                 </div>
               </div>
             </div>
-
-            {/* About Us */}
-            {/* <div className={Styles.about}>
-          <h2 className={Styles.title}>About Us</h2>
-          <Text variant={'lg'}><Text className={'aboutUs'}>eDesignGuru is a leading Website Design and Development company. We are located in Ahmedabad, Gujarat, India. Making attractive and easy to use websites has always been our main planning. We provide services in wide range of Website Design and Development, Graphic Design, Logo Design and Branding.</Text> <Link>Read More..</Link></Text>
-        </div> */}
-
-            {/* <div className={Styles.bG}>
-          Education
-          <div className={Styles.eduction}>
-            <h2 className={Styles.title}>Education</h2>
-            <ul className={Styles.list}>
-              <li>
-                <div className={Styles.marker}></div>
-                <h6>Master of Computer Applications</h6>
-                <div>Devi Ahilya Vishwavidyalaya University, Indore</div>
-                <div className={Styles.year}>2020 - 2022</div>
-              </li>
-              <li>
-                <div className={Styles.marker}></div>
-                <h6>Master of Computer Applications</h6>
-                <div>Devi Ahilya Vishwavidyalaya University, Indore</div>
-                <div>Devi Ahilya Vishwavidyalaya University, Indore</div>
-                <div className={Styles.year}>2020 - 2022</div>
-              </li>
-            </ul>
-          </div>
-          Experience
-          <div className={Styles.experience}>
-            <h2 className={Styles.title}>Experience</h2>
-            <ul className={Styles.list}>
-              <li>
-                <div className={Styles.marker}></div>
-                <div className={Styles.year}>Nov 2019 - Present</div>
-                <h6>Sr. Php Developer, Google Inc</h6>
-                <div>During my time at Google, I worked and several large scale projects for clients. The products are
-                  management applications used by our client for all their operations process.</div>
-              </li>
-              <li>
-                <div className={Styles.marker}></div>
-                <h6>Master of Computer Applications</h6>
-                <div>Devi Ahilya Vishwavidyalaya University, Indore</div>
-                <div>Devi Ahilya Vishwavidyalaya University, Indore</div>
-                <div className={Styles.year}>2020 - 2022</div>
-              </li>
-            </ul>
-          </div>
-        </div> */}
-
-            {/* Project */}
-            {/* <div className={Styles.project}>
-          <h2 className={Styles.title}>Projects</h2>
-          <div className={Styles.projectBox}>
-            <div>
-              <div className={Styles.projectName}>Project Name</div>
-              <div className={Styles.projectDescription}>Project Description..</div>
-            </div>
-            <div className={Styles.icon}>@</div>
-          </div>
-          <div className={Styles.projectBox}>
-            <div>
-              <div className={Styles.projectName}>Project Name</div>
-              <div className={Styles.projectDescription}>Project Description..</div>
-            </div>
-            <div className={Styles.icon}>@</div>
-          </div>
-          <div className={Styles.projectBox}>
-            <div>
-              <div className={Styles.projectName}>Project Name</div>
-              <div className={Styles.projectDescription}>Project Description..</div>
-            </div>
-            <div className={Styles.icon}>@</div>
-          </div>
-          <div className={Styles.projectBox}>
-            <div>
-              <div className={Styles.projectName}>Project Name</div>
-              <div className={Styles.projectDescription}>Project Description..</div>
-            </div>
-            <div className={Styles.icon}>@</div>
-          </div>
-        </div> */}
 
             {/* Document */}
             <div className={Styles.document}>

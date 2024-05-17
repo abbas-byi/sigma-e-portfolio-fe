@@ -7,7 +7,7 @@ import PortfolioForm from "./portfolioForm/portfolioForm";
 import Resume from "./resume";
 import ResumeForm from "./resumeForm/resumeForm";
 import Subscribe from "./subscribe";
-import UploadImageToS3WithReactS3 from "./uploadImage/upload";
+import Enquiries from "./enquiries";
 
 export {
   Dashboard,
@@ -18,4 +18,5 @@ export {
   Subscribe,
   PortfolioForm,
   ResumeForm,
+  Enquiries,
 }

@@ -35,6 +35,7 @@ const Sidebar = () => {
                     <li onClick={ToPortfolio} className={activeButton === 'E-Portfolio' && Styles.active}><Icon className={'icon-portfolio'} /> <Text>E-Portfolio</Text></li>
                     <li><Icon className={'icon-contacts'} /> <Text>Contacts</Text></li>
                     <li><Icon className={'icon-anlytics'} /> <Text>Analytics</Text></li>
+                    <li><Icon className={'icon-anlytics'} /> <Text>Enquiries</Text></li>
                 </ul>
             </div>
             <div className={Styles.upgrade}>

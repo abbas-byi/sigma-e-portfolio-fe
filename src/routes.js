@@ -1,5 +1,5 @@
 import {
-  Dashboard, Login, Portfolio, PortfolioForm, Register, Resume, ResumeForm, Subscribe,
+  Dashboard, Enquiries, Login, Portfolio, PortfolioForm, Register, Resume, ResumeForm, Subscribe,
 } from './pages'
 import MainForm from './pages/createTaskMultiStepForm/MultiStepForm'
 import viewPortfolio from './pages/viewPortfolio'
@@ -78,5 +78,10 @@ export const routes = [
     path: '/file-drag',
     component: FileDragZone,
     exact: true
+  },
+  {
+    path: '/enquiries',
+    component: Enquiries,
+    exact: true,
   }
 ]
