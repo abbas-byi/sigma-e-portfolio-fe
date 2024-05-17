@@ -1,12 +1,21 @@
 import React from "react";
-import { Button, Card, Icon, Input, Label, Text } from "../../components";
+import {
+  Button,
+  Card,
+  Icon,
+  Input,
+  Label,
+  Text,
+  FileDragZone,
+} from "../../components";
 import "react-multiple-select-dropdown-lite/dist/index.css";
 import { usePortfolioForm } from "./usePortfolioForm";
 
 const ActionButtons = (props) => {
   const { onHandleNext } = props; // Custom handler for the Next button
 
-  const handleBack = () => {
+  const handleBack = (e) => {
+    e.preventDefault();
     props.previousStep();
   };
 
@@ -50,10 +59,20 @@ const ActionButtons = (props) => {
 };
 
 const One = (props) => {
-  const { portfolioDetails, handleChange, nextStep } = props;
-  const handleNext = () => {
-    // console.log("Current Resume Details:", portfolioDetails);
-    nextStep(); 
+  const { uploadFileToS3Bucket } = usePortfolioForm();
+  const { portfolioDetails, handleChange, nextStep, handleFileChange } = props;
+  const handleNext = async () => {
+    try {
+      if (portfolioDetails.profilePhoto.length > 0) {
+        await uploadFileToS3Bucket(
+          portfolioDetails.profilePhoto,
+          "profilePhoto"
+        );
+      }
+      nextStep();
+    } catch (error) {
+      console.error("Error uploading files:", error);
+    }
   };
   return (
     <Card>
@@ -98,6 +117,15 @@ const One = (props) => {
         />
       </div>
       <div className="mt-3">
+        <Label>Company Name</Label>
+        <Input
+          type={"text"}
+          placeholder={"Enter Company Name"}
+          inputName={"companyName"}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="mt-3">
         <Label>Designation</Label>
         <Input
           type={"text"}
@@ -106,15 +134,22 @@ const One = (props) => {
           onChange={handleChange}
         />
       </div>
-      {/*<div className="mt-3">
-        <Label>LinkedIn Profile</Label>
+      <div className="mt-3">
+        <Label>About</Label>
         <Input
-          type={"text"}
-          placeholder={"LinkedIn Profile URL"}
-          inputName={"linkedInProfileUrl"}
+          type={"textarea"}
+          rows={4}
           onChange={handleChange}
+          inputName={"about"}
         />
-  </div>*/}
+      </div>
+      <div className="mt-3">
+        <Label>Profile Photo</Label>
+        <FileDragZone
+          onFilesSelected={(files) => handleFileChange(files, "profilePhoto")}
+          height="200px"
+        />
+      </div>
       <ActionButtons {...props} onHandleNext={handleNext} />
     </Card>
   );

@@ -55,7 +55,7 @@ const Five = (props) => {
     lastStep();
     try {
       submitPortfolioDetails(portfolioDetails);
-      navigate("./portfolio");
+      // navigate("./portfolio");
     } catch (error) {
       console.error(error);
     }
@@ -71,7 +71,7 @@ const Five = (props) => {
         <Input
           type={"text"}
           onChange={handleChange}
-          inputName="phonePayUPIID"
+          inputName="phonePayUPIId"
           placeholder={'Enter Phone Pay UPI Id'}
         />
       </div>

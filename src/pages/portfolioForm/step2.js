@@ -61,7 +61,6 @@ const Two = (props) => {
     portfolioDetails,
     handleChange,
     removeFile,
-    handleFileChange,
     nextStep,
   } = props;
 

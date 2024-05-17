@@ -64,19 +64,19 @@ const Three = (props) => {
 
   const handleNext = async () => {
     try {
-      if (portfolioDetails.serviceOneImage.length > 0) {
+      if (portfolioDetails?.serviceOneImage) {
         await uploadFileToS3Bucket(portfolioDetails.serviceOneImage, "serviceOneImage");
       }
-      if (portfolioDetails.serviceTwoImage.length > 0) {
+      nextStep();
+      if (portfolioDetails?.serviceTwoImage) {
         await uploadFileToS3Bucket(portfolioDetails.serviceTwoImage, "serviceTwoImage");
       }
-      if (portfolioDetails.serviceThreeImage.length > 0) {
+      if (portfolioDetails?.serviceThreeImage) {
         await uploadFileToS3Bucket(portfolioDetails.serviceThreeImage, "serviceThreeImage");
       }
     } catch (error) {
       console.error("Error uploading files:", error);
     }
-    nextStep();
   };
 
   return (
@@ -87,6 +87,7 @@ const Three = (props) => {
         onFilesSelected={(files) => handleFileChange(files, 'serviceOneImage')}
         height="150px"
         className="mt-3"
+        maxFiles={1}
         />
       </div>
       <div className="mt-3">

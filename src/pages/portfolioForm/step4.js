@@ -67,10 +67,10 @@ const Four = (props) => {
       }if (portfolioDetails.galleryImages.length > 0) {
         await uploadFileToS3Bucket(portfolioDetails.galleryImages, "galleryImages");
       }
+      nextStep();
     } catch (error) {
       console.error("Error uploading files:", error);
     }
-    nextStep();
   };
 
 
@@ -81,6 +81,7 @@ const Four = (props) => {
         <FileDragZone 
         onFilesSelected = {(files) => handleFileChange(files, 'videos')}
         height="200px"
+        maxFiles={3}
         />
       </div>
       <div className="mt-3">
@@ -88,6 +89,7 @@ const Four = (props) => {
         <FileDragZone 
         onFilesSelected = {(files) => handleFileChange(files, 'galleryImages')}
         height="200px"
+        maxFiles={6}
         />
       </div>
       <ActionButtons {...props} onHandleNext={handleNext} />

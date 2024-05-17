@@ -3,13 +3,18 @@ import { AiOutlineCheckCircle, AiOutlineCloudUpload } from "react-icons/ai";
 import { MdClear } from "react-icons/md";
 import "./fileDragZone.scss";
 
-const FileDragZone = ({ onFilesSelected = () => {}, width = '100%', height = '200px' }) => {
+const FileDragZone = ({
+  onFilesSelected = () => {},
+  width = '100%',
+  height = '200px',
+  maxFiles = 50 // Add maxFiles prop with default value
+}) => {
   const [files, setFiles] = useState([]);
 
   const handleFileChange = (event) => {
     const selectedFiles = event.target.files;
     if (selectedFiles && selectedFiles.length > 0) {
-      const newFiles = Array.from(selectedFiles);
+      const newFiles = Array.from(selectedFiles).slice(0, maxFiles - files.length);
       setFiles((prevFiles) => [...prevFiles, ...newFiles]);
     }
   };
@@ -18,7 +23,7 @@ const FileDragZone = ({ onFilesSelected = () => {}, width = '100%', height = '20
     event.preventDefault();
     const droppedFiles = event.dataTransfer.files;
     if (droppedFiles.length > 0) {
-      const newFiles = Array.from(droppedFiles);
+      const newFiles = Array.from(droppedFiles).slice(0, maxFiles - files.length);
       setFiles((prevFiles) => [...prevFiles, ...newFiles]);
     }
   };
@@ -46,10 +51,10 @@ const FileDragZone = ({ onFilesSelected = () => {}, width = '100%', height = '20
             <AiOutlineCloudUpload />
             <div>
               <p>Drag and drop your files here</p>
-             {/* <p>
+              {/* <p>
                 Limit 15MB per file. Supported files: .PDF, .DOCX, .PPTX, .TXT,
                 .XLSX
-      </p>*/}
+              </p> */}
             </div>
           </div>
           <input
@@ -59,8 +64,9 @@ const FileDragZone = ({ onFilesSelected = () => {}, width = '100%', height = '20
             onChange={handleFileChange}
             accept=".png,.jpeg,.jpg,.pdf,.mp4,"
             multiple
+            disabled={files.length >= maxFiles} // Disable if maxFiles reached
           />
-          <label htmlFor="browse" className="browse-btn">
+          <label htmlFor="browse" className={`browse-btn ${files.length >= maxFiles ? 'disabled' : ''}`}>
             Browse files
           </label>
         </div>

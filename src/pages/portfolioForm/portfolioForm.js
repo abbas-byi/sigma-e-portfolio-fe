@@ -79,6 +79,7 @@ const PortfolioForm = () => {
                     userCallback={assignUser}
                     portfolioDetails={portfolioDetails}
                     handleChange={handleChange}
+                    handleFileChange={handleFileChange}
                   />
                   <Two
                     userCallback={assignUser}
