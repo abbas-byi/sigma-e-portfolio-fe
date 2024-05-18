@@ -1,0 +1,33 @@
+@import '../../assets/scss/variables.scss';
+@import '../../assets/scss/mixins.scss';
+
+.xs {
+    font-size: $font-xs;
+    line-height: 24px;
+    @include textStyling;
+}
+.sm {
+    font-size: $font-sm;
+    line-height: 26px;
+    @include textStyling;
+}
+.md {
+    font-size: $font-md;
+    line-height: 28px;
+    @include textStyling;
+}
+.lg {
+    font-size: $font-lg;
+    line-height: 26px;
+    @include textStyling;
+}
+.xl {
+    font-size: $font-xl;
+    line-height: 32px;
+    @include textStyling;
+}
+.xxl {
+    font-size: $font-xxl;
+    line-height: 36px;
+    @include textStyling;
+}

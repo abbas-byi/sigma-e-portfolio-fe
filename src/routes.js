@@ -1,5 +1,6 @@
 import {
   Dashboard, Enquiries, Login, Portfolio, PortfolioForm, Register, Resume, ResumeForm, Subscribe,
+  ViewResumeWithId,
 } from './pages'
 import MainForm from './pages/createTaskMultiStepForm/MultiStepForm'
 import viewPortfolio from './pages/viewPortfolio'
@@ -82,6 +83,11 @@ export const routes = [
   {
     path: '/enquiries',
     component: Enquiries,
+    exact: true,
+  },
+  {
+    path: '/resume/:resumeId',
+    component: ViewResumeWithId,
     exact: true,
   }
 ]

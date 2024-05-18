@@ -8,6 +8,7 @@ import Resume from "./resume";
 import ResumeForm from "./resumeForm/resumeForm";
 import Subscribe from "./subscribe";
 import Enquiries from "./enquiries";
+import ViewResumeWithId from "./viewResumeWithId/viewResumeWithId";
 
 export {
   Dashboard,
@@ -19,4 +20,5 @@ export {
   PortfolioForm,
   ResumeForm,
   Enquiries,
+  ViewResumeWithId,
 }

@@ -9,11 +9,13 @@ import { useGetResumeDetails } from "./useGetResumeDetails";
 const Resume = () => {
   const navigate = useNavigate();
   const ToResume = () => navigate("/resume/new-resume");
-  const viewResume = () => navigate("/resume/view-resume")
+  const viewResume = () => navigate("/resume/view-resume");
   const { userDetails } = useResume();
   const userId = sessionStorage.getItem('userId');
   const token = sessionStorage.getItem('token')
   const { resumeDetails } = useGetResumeDetails(token, userId);
+  const resumeId = resumeDetails?.id;
+  const shareResume = () => navigate(`/resume/${resumeId}`);
 
   return (
     <ProtectedRoute>
@@ -42,7 +44,7 @@ const Resume = () => {
                 <Button onClick={viewResume}>
                   <Icon className={"icon-view"} /> View
                 </Button>
-                <Button>
+                <Button onClick={shareResume}>
                   <Icon className={"icon-share"} /> Share
                 </Button>
               </div>

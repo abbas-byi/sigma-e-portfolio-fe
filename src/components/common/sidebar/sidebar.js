@@ -8,6 +8,7 @@ const Sidebar = () => {
     const ToDashboard = () => navigate('/dashboard');
     const ToResume = () => navigate('/resume');
     const ToPortfolio = () => navigate('/portfolio');
+    const ToEnquirires = () => navigate('/enquiries');
     const url = window.location.href;
     const [activeButton, setActiveButton] = useState('');
 
@@ -20,6 +21,9 @@ const Sidebar = () => {
         }
         if (url.includes('portfolio')) {
             setActiveButton('E-Portfolio');
+        }
+        if (url.includes('enquiries')) {
+            setActiveButton('Enquiries');
         }
     }, [url])
 
@@ -35,7 +39,7 @@ const Sidebar = () => {
                     <li onClick={ToPortfolio} className={activeButton === 'E-Portfolio' && Styles.active}><Icon className={'icon-portfolio'} /> <Text>E-Portfolio</Text></li>
                     <li><Icon className={'icon-contacts'} /> <Text>Contacts</Text></li>
                     <li><Icon className={'icon-anlytics'} /> <Text>Analytics</Text></li>
-                    <li><Icon className={'icon-anlytics'} /> <Text>Enquiries</Text></li>
+                    <li onClick={ToEnquirires} className={activeButton === 'Enquiries' && Styles.active}><Icon className={'icon-anlytics'} /> <Text>Enquiries</Text></li>
                 </ul>
             </div>
             <div className={Styles.upgrade}>
